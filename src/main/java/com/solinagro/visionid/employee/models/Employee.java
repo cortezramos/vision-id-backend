@@ -22,6 +22,7 @@ public class Employee implements Serializable {
 
     private String name;
 
+    @JoinColumn(name = "last_name")
     private String lastName;
 
     @JoinColumn(name = "external_id")
