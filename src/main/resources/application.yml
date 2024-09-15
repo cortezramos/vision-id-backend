@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: coconut-andrea-one
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  datasource:
+    #url: jdbc:sqlserver://localhost:1435;databaseName=vision_id_attendance;encrypt=true;trustServerCertificate=true
+    url: jdbc:sqlserver://localhost;databaseName=vision_id_attendance;encrypt=true;trustServerCertificate=true
+    username: sa
+    #password: 123456789
+    password: P123456789e
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 50
+      max-lifetime: 30000
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+
+server:
+  port: 8008
+
+logging:
+  level:
+    org.springframework.security: trace
