@@ -28,4 +28,7 @@ public class Employee implements Serializable {
     @JoinColumn(name = "external_id")
     private Long externalId;
 
+    @JoinColumn(name = "document_identification")
+    private Long documentIdentification;
+
 }

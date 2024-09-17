@@ -2,6 +2,7 @@ create table employees (
     id numeric(18,0) PRIMARY KEY IDENTITY(1, 1),
     name varchar(50),
     last_name varchar(50),
-    external_id numeric(18,0)
+    external_id numeric(18,0),
+    document_identification numeric(18,0)
 )
 go

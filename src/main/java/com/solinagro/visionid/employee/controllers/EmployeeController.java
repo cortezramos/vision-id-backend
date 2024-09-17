@@ -1,30 +1,52 @@
 package com.solinagro.visionid.employee.controllers;
 
+import com.solinagro.visionid.common.exceptions.VisionException;
+import com.solinagro.visionid.common.utilities.ApiResult;
+import com.solinagro.visionid.common.wrapper.AbstractServiceWrapper;
 import com.solinagro.visionid.employee.models.Employee;
 import com.solinagro.visionid.employee.services.EmployeeService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/vision-id/employees")
 @AllArgsConstructor
-public class EmployeeController {
+public class EmployeeController extends AbstractServiceWrapper {
 
     private final EmployeeService employeeService;
 
-    @GetMapping("/getById/{id}")
-    public Employee getEmployeeById(@PathVariable final Long id) {
-        return employeeService.getEmployeeById(id);
+    @GetMapping("/all")
+    public ResponseEntity<ApiResult> getAllEmployees() {
+        List<Employee> employees = employeeService.getAllEmployees();
+        return createResponseEntity(createApiResult("All employees found from db.", null, HttpStatus.OK, employees));
     }
 
-    @GetMapping("/all")
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    @PostMapping("/save")
+    public ResponseEntity<ApiResult> saveEmployee(@RequestBody final Employee employee) throws VisionException {
+        Employee savedEmployee = employeeService.saveEmployee(employee);
+        return createResponseEntity(createApiResult("Employee saved successfully.", null, HttpStatus.CREATED, savedEmployee));
+    }
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<ApiResult> getEmployeeById(@PathVariable final Long id) throws VisionException {
+        Employee employee = employeeService.getEmployeeById(id).orElse(null);
+        return createResponseEntity(createApiResult("Employee found from db.", null, HttpStatus.OK, employee));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ApiResult> deleteEmployee(@PathVariable final Long id) throws VisionException {
+        Employee deletedEmployee = employeeService.deleteEmployee(id);
+        return createResponseEntity(createApiResult("Employee deleted successfully.", null, HttpStatus.OK, deletedEmployee));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<ApiResult> updateEmployee(@RequestBody final Employee employee) throws VisionException {
+        Employee updatedEmployee = employeeService.updateEmployee(employee);
+        return createResponseEntity(createApiResult("Employee updated successfully.", null, HttpStatus.OK, updatedEmployee));
     }
 
 }
