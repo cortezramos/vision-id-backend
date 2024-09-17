@@ -1,0 +1,20 @@
+meta {
+  name: Create
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}employees/save
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Pedro",
+    "lastName": "Gonzales",
+    "externalId": "110",
+    "documentIdentification": "276389098790"
+  }
+}

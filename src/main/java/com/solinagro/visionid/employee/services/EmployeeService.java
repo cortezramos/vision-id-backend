@@ -75,7 +75,7 @@ public class EmployeeService {
             throw new VisionException("Employee is null");
         }
 
-        Employee employeeFound = employeeRepository.findById(employee.getExternalId()).orElse(null);
+        Employee employeeFound = employeeRepository.findById(employee.getId()).orElse(null);
 
         if (employeeFound == null) {
             throw new VisionException("Empleado no encontrado, no se puede actualizar");

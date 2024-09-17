@@ -1,0 +1,21 @@
+meta {
+  name: Update
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{url}}employees/update
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+        "id": 3,
+        "name": "Pedro",
+        "lastName": "Actualizado",
+        "externalId": 110,
+        "documentIdentification": 276389098790
+      }
+}
